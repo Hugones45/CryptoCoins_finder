@@ -40,14 +40,16 @@ export function Home() {
                     })
 
                     const formatResult = coinsData.map((item) => {
+                        const numberDelta = typeof item.delta_24h === 'string' ? parseFloat(item.delta_24h.replace(",", ".")) : 0;
+
                         const formated = {
                             ...item,
                             formatedPrice: price.format(Number(item.price)),
                             formatedMarket: price.format(Number(item.market_cap)),
-                            numberDelta: parseFloat(item.delta_24h.replace(",", "."))
-                        }
-                        return formated
-                    })
+                            numberDelta: numberDelta
+                        };
+                        return formated;
+                    });
 
                     setLoading(false)
                     setCoins(formatResult)
